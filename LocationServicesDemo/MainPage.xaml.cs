@@ -16,14 +16,14 @@ namespace LocationServicesDemo
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        private bool canQuery = false;
-        private GeoCoordinateWatcher geoWatcher;
+        private bool canUseLocation = false;
+        private readonly GeoCoordinateWatcher _geoWatcher;
         // Constructor
         public MainPage()
         {
-            geoWatcher = new GeoCoordinateWatcher();
+            _geoWatcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
             //Don't enable geolocation tracking until the button gets pressed
-            geoWatcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(GeoWatcherPositionChanged);
+            _geoWatcher.PositionChanged += GeoWatcherPositionChanged;
             InitializeComponent();
         }
 
@@ -39,12 +39,35 @@ namespace LocationServicesDemo
 
         private void btnGetLocation_Click(object sender, RoutedEventArgs e)
         {
-            geoWatcher.Start();   
+            if(canUseLocation)
+                _geoWatcher.Start();   
         }
 
         private void btnStopLocation_Click(object sender, RoutedEventArgs e)
         {
-            geoWatcher.Stop();
+            if (canUseLocation)
+            _geoWatcher.Stop();
+        }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            Dispatcher.BeginInvoke(() =>
+                                       {
+                                           var result = MessageBox.Show(
+                                               "This application uses your location. Do you wish to give it permission to use your location?",
+                                               "User Location Data", MessageBoxButton.OKCancel);
+
+                                           if(result == MessageBoxResult.Cancel)
+                                           {
+                                               MessageBox.Show(
+                                                   "You realize that this app won't do anything now that you've declined location services, right?");
+                                           }
+                                           else
+                                           {
+                                               canUseLocation = true;
+                                           }
+                                       });
         }
     }
 }
