@@ -21,7 +21,7 @@ namespace LocationServicesDemo
         // Constructor
         public MainPage()
         {
-            _geoWatcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
+            _geoWatcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default);
             //Don't enable geolocation tracking until the button gets pressed
             _geoWatcher.PositionChanged += GeoWatcherPositionChanged;
             InitializeComponent();
@@ -29,8 +29,10 @@ namespace LocationServicesDemo
 
         private void GeoWatcherPositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
         {
+            var accuracy = e.Position.Location.HorizontalAccuracy;
             Dispatcher.BeginInvoke(() =>
                                        {
+                                           txtAccuracy.Text = e.Position.Location.HorizontalAccuracy.ToString();
                                            txtLat.Text = e.Position.Location.Latitude.ToString();
                                            txtLong.Text = e.Position.Location.Longitude.ToString();
                                            txtAlt.Text = e.Position.Location.Altitude.ToString();
@@ -40,7 +42,7 @@ namespace LocationServicesDemo
         private void btnGetLocation_Click(object sender, RoutedEventArgs e)
         {
             if(canUseLocation)
-                _geoWatcher.Start();   
+                _geoWatcher.Start();
         }
 
         private void btnStopLocation_Click(object sender, RoutedEventArgs e)

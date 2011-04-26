@@ -33,6 +33,7 @@
             		<RowDefinition Height="Auto"/>
             		<RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
         		</Grid.RowDefinitions>
@@ -46,8 +47,10 @@
 				<TextBox x:Name="txtLong" TextWrapping="Wrap" Text="39.1" d:LayoutOverrides="Width, Height" Grid.Column="1" Grid.Row="1" IsReadOnly="True"/>
         		<TextBlock x:Name="lblAltitude" Margin="15,0" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" Text="Altitude" VerticalAlignment="Center" d:LayoutOverrides="Width" Grid.Row="2"/>    
 				<TextBox x:Name="txtAlt" TextWrapping="Wrap" Text="39.1" d:LayoutOverrides="Width, Height" Grid.Column="1" Grid.Row="2" IsReadOnly="True"/>
-				<Button x:Name="btnGetLocation" Content="Get My Location" Margin="0,25,0,3" d:LayoutOverrides="Width, Height" Grid.Row="3" Grid.ColumnSpan="2" Click="btnGetLocation_Click" />
-                <Button x:Name="btnStopLocation" Content="Don't Get My Location" Margin="0,25,0,3" d:LayoutOverrides="Width, Height" Grid.Row="4" Grid.ColumnSpan="2" Click="btnStopLocation_Click" />
+                <TextBlock x:Name="lblAccuracy" Margin="15,0" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" Text="H Accuracy" VerticalAlignment="Center" d:LayoutOverrides="Width" Grid.Row="3"/>
+                <TextBox x:Name="txtAccuracy" TextWrapping="Wrap" Text="39.1" d:LayoutOverrides="Width, Height" Grid.Column="1" Grid.Row="3" IsReadOnly="True"/>
+                <Button x:Name="btnGetLocation" Content="Get My Location" Margin="0,25,0,3" d:LayoutOverrides="Width, Height" Grid.Row="4" Grid.ColumnSpan="2" Click="btnGetLocation_Click" />
+                <Button x:Name="btnStopLocation" Content="Don't Get My Location" Margin="0,25,0,3" d:LayoutOverrides="Width, Height" Grid.Row="5" Grid.ColumnSpan="2" Click="btnStopLocation_Click" />
         	</Grid>        	
 		</Grid>
     </Grid>
